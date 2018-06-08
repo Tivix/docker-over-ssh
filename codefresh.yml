@@ -1,0 +1,19 @@
+version: '1.0'
+
+steps:
+  build_nginx:
+    type: build
+    description: Builds nginx container
+    working_directory: ${{main_clone}}
+    dockerfile: Dockerfile
+    image_name: tivix/docker-over-ssh
+    tag: latest
+
+  push_to_registry:
+    title: Pushing to Docker Registry
+    type: push
+    candidate: ${{build_image}}
+    tag: latest
+    credentials:
+      username: ${{HUB_USERNAME}}
+      password: ${{HUB_PASSWORD}}
