@@ -1,7 +1,7 @@
 version: '1.0'
 
 steps:
-  build_nginx:
+  build_image:
     type: build
     description: Builds nginx container
     working_directory: ${{main_clone}}
