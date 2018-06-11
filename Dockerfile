@@ -6,6 +6,6 @@ RUN apk --no-cache add curl bash openssh-client &&\
     rm -rf /tmp/docker &&\
     chmod +x /usr/bin/docker
 
-ADD ./docker-entrypoint.sh ./docker-over-ssh /usr/bin/
+ADD ./docker-entrypoint.sh /usr/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
