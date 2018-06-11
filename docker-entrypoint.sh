@@ -29,7 +29,11 @@ else
         echo "Couldnt connect to remote host."
         exit 2
     else
-        export DOCKER_HOST="unix:///var/run/docker.sock"
-        exec $@
+        if [ "$1" == "background" ]; then
+            echo "Running SSH tunnel in background..."
+        else
+            export DOCKER_HOST="unix:///var/run/docker.sock"
+            exec $@
+        fi
     fi
 fi
