@@ -8,4 +8,6 @@ RUN apk --no-cache add curl bash openssh-client &&\
 
 ADD ./docker-entrypoint.sh /usr/bin/
 
+ENV DOCKER_HOST=unix:///var/run/docker.sock
+
 ENTRYPOINT ["docker-entrypoint.sh"]
