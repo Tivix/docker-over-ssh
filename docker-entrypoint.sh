@@ -11,7 +11,7 @@ else
     fi
 fi
 
-[ -z ${DOCKER_REMOTE_HOST} ] && echo "Missing DOCKER_HOST env variable." && exit 1
+[ -z ${DOCKER_REMOTE_HOST} ] && echo "Missing DOCKER_REMOTE_HOST env variable." && exit 1
 [ -e "/var/run/docker.sock" ] && rm -f /var/run/docker.sock
 
 if [ "$#" -eq 0 ]; then
@@ -29,10 +29,10 @@ else
         echo "Couldnt connect to remote host."
         exit 2
     else
+	export DOCKER_HOST="unix:///var/run/docker.sock"
         if [ "$1" == "background" ]; then
             echo "Running SSH tunnel in background..."
         else
-            export DOCKER_HOST="unix:///var/run/docker.sock"
             exec $@
         fi
     fi
