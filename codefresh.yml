@@ -1,19 +1,24 @@
 version: '1.0'
 
 steps:
+  main_clone:
+    title: Cloning main repository...
+    type: git-clone
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    revision: '${{CF_REVISION}}'
+
   build_image:
+    title: Building image
     type: build
     description: Builds nginx container
-    working_directory: ${{main_clone}}
-    dockerfile: Dockerfile
     image_name: tivix/docker-over-ssh
-    tag: latest
+    tag: v2
 
   push_to_registry:
     title: Pushing to Docker Registry
     type: push
     candidate: ${{build_image}}
-    tag: latest
+    tag: v2
     credentials:
       username: ${{HUB_USERNAME}}
       password: ${{HUB_PASSWORD}}

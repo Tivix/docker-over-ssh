@@ -1,13 +1,5 @@
-FROM alpine:3.7
+FROM docker:18.09
 
-RUN apk --no-cache add curl bash openssh-client &&\
-    curl -L https://download.docker.com/linux/static/stable/x86_64/docker-18.03.1-ce.tgz | tar -xz -C /tmp/ &&\
-    mv /tmp/docker/docker /usr/bin/docker &&\
-    rm -rf /tmp/docker &&\
-    chmod +x /usr/bin/docker
+RUN apk --no-cache add bash openssh-client
 
-ADD ./docker-entrypoint.sh /usr/bin/
-
-ENV DOCKER_HOST=unix:///var/run/docker.sock
-
-ENTRYPOINT ["docker-entrypoint.sh"]
+ADD parse-ssh-key.sh /usr/local/bin
